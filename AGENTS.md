@@ -8,6 +8,7 @@ Extracts story/home/race text from Umamusume (赛马娘) game data into JSON for
 - `UmamusumeStoryDataExtractor.CppUtility/` — C++/CLI mixed-mode DLL (VC v143, `<CLRSupport>NetCore</CLRSupport>`). Exposes `CppUtility.GetCppStdHash` = MSVC `std::hash<std::wstring_view>` over UTF-16; its `uint64` outputs are the keys used to look up translations. This hash is implementation-specific — do not "fix" it to plain .NET hashing without considering the consuming hash maps.
 - `ThirdParty/AssetStudio/` — git submodule (Perfare/AssetStudio, pinned commit) used as a library (`AssetsManager`, `MonoBehaviour`) to load Unity assets. **Initialize before building:** `git submodule update --init` (currently not checked out in a fresh clone).
 - `tools/steam/` — Python helpers for the encrypted Steam/Global release (decrypt `meta` + `dat` bundles into a directory the extractor can read); see `tools/steam/README.md`.
+- `tools/db/` — Python scripts that build a SQLite role-play corpus from the extracted JSON + `master.mdb` (FTS5 trigram search, character/story mapping, JSONL/Parquet export); see `tools/db/README.md`.
 
 ## Build (Windows only)
 Requires Visual Studio 2022 (MSVC v143 for the vcxproj) + a .NET SDK. Use msbuild from a VS Developer environment; plain `dotnet build` cannot build the solution because it contains a vcxproj. CI (`ci.yml`) does:
